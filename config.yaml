@@ -39,7 +39,7 @@ source: 'https://github.com/carpentries-incubator/hpc-intro'
 branch: 'main'
 
 # Who to contact if there are any issues
-contact: 'team@carpentries.org'
+contact: 'training.researchcomputing@newcastle.ac.uk'
 
 # Navigation ------------------------------------------------
 #
@@ -97,6 +97,6 @@ profiles:
 
 
 carpentry_description: Lesson Description
-url: 'https://carpentries-incubator.github.io/hpc-intro/'
+url: 'https://github.com/NewcastleRSE-Training/hpc-intro'
 analytics: carpentries
 lang: en

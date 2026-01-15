@@ -2358,7 +2358,7 @@ command. Do you notice any difference?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The <code>TIME_STYLE</code> variable is not <em>seen</em> by
 <code>ls</code> until is exported, at which point it is used by
@@ -2395,7 +2395,7 @@ prints out the location from which the job was submitted.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -2900,7 +2900,7 @@ login node is loaded on a compute node).</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb25">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -4196,7 +4196,7 @@ output?</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Read the Job Output </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>The cluster output should be written to a file in the folder you
 launched the job from. For example,</p>
@@ -4373,7 +4373,7 @@ does that mean it finished in ¼ the time?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>The parallel job did take <em>less</em> time: 11 seconds is better
 than 30! But it is only a 2.7× improvement, not 4×.</p>
@@ -4641,11 +4641,28 @@ advanced form of parallelism is MPI, which is covered in the next
 episode. It is possible to use both these methods at the same time,
 using an array job to run multiple instances of software, which itself
 uses MPI.</p>
-<p>Download the word frequency script from <a href="https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/word-freq.sh" class="external-link uri">https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/word-freq.sh</a></p>
+<p>cd training directory mkdir username cd username</p>
+<p>Download the word frequency script wget <a href="https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/word-freq.sh" class="external-link uri">https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/word-freq.sh</a></p>
+<p>write a small file to test our script</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">[user@cometlogin01</span><span class="er">(</span><span class="ex">comet</span><span class="kw">)</span> <span class="ex">~]</span> nano test-data.txt</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">[user@cometlogin01</span><span class="er">(</span><span class="ex">comet</span><span class="kw">)</span> <span class="ex">~]</span> cat test-data.txt</span></code></pre>
+</div>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">This</span> is a small file <span class="at">-</span> it will be very useful for trying out our script.</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="ex">Some</span> words are repeated in this file</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="ex">-</span> we can look for repeated words</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ex">and</span> count them <span class="er">(</span><span class="ex">to</span> see which words are repeated most often<span class="kw">)</span><span class="bu">.</span></span></code></pre>
+</div>
 <p>Run at command line with a small test file
 (/nobackup/proj/comet_training/ArrayJob/test-data.txt)</p>
 <p>Write a batch script to call the word-freq.sh as single job and run
 using slurm (job_single_word-freq.sh) or download it from <a href="https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/job_single_word-freq.sh" class="external-link uri">https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/job_single_word-freq.sh</a></p>
+<p>Download the data using <a href="https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/make-data.sh" class="external-link uri">https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/make-data.sh</a></p>
 <p>Update the batch sript to run on the first file of 4 text files named
 data.1 data.2 data.3 data.4 downloaded from the Guteberg project (in
 /nobackup/proj/comet_training/ArrayJob/ - see make-data.sh to download
@@ -4654,34 +4671,34 @@ again)</p>
 parallel jobs to process all 4 text files (job_array_word-freq.sh) or
 download it from <a href="https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/job_array_word-freq.sh" class="external-link uri">https://github.com/NewcastleRSE-Training/hpc-intro/blob/main/episodes/files/job_array_word-freq.sh</a></p>
 <p>Check slurm.out files to see how quickly the jobs completed</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#SBATCH --partition=short_free</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#SBATCH --job-name=</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#SBATCH --tasks=1</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># Do a word frequency analysis of the collected works of Shakespeare</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="va">DATA_FILE</span><span class="op">=</span>data.1</span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Starting word frequency analysis of </span><span class="va">$DATA_FILE</span><span class="st">"</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"=============================================="</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="bu">time</span> cat <span class="va">$DATA_FILE</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>	<span class="fu">sed</span> s<span class="st">'/\ /\n/g'</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>	<span class="fu">tr</span> <span class="at">-c</span> <span class="at">-d</span> <span class="st">"[A-Za-z\n]"</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>	<span class="fu">tr</span> <span class="pp">[</span><span class="ss">A</span><span class="pp">-</span><span class="ss">Z</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">a</span><span class="pp">-</span><span class="ss">z</span><span class="pp">]</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>	<span class="fu">sort</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>	<span class="fu">strings</span> <span class="at">-n</span> 1 <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>	<span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="dt">\</span></span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>	<span class="fu">sort</span> <span class="at">-n</span> <span class="op">&gt;</span> data.out</span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"====================================="</span></span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Completed word analysis of </span><span class="va">$DATA_FILE</span><span class="st">"</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co">#SBATCH --partition=short_free</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co">#SBATCH --job-name=</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co">#SBATCH --nodes=1</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co">#SBATCH --tasks=1</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=1</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="co"># Do a word frequency analysis of the collected works of Shakespeare</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="va">DATA_FILE</span><span class="op">=</span>data.1</span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Starting word frequency analysis of </span><span class="va">$DATA_FILE</span><span class="st">"</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"=============================================="</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="bu">time</span> cat <span class="va">$DATA_FILE</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>	<span class="fu">sed</span> s<span class="st">'/\ /\n/g'</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>	<span class="fu">tr</span> <span class="at">-c</span> <span class="at">-d</span> <span class="st">"[A-Za-z\n]"</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>	<span class="fu">tr</span> <span class="pp">[</span><span class="ss">A</span><span class="pp">-</span><span class="ss">Z</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">a</span><span class="pp">-</span><span class="ss">z</span><span class="pp">]</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>	<span class="fu">sort</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>	<span class="fu">strings</span> <span class="at">-n</span> 1 <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>	<span class="fu">uniq</span> <span class="at">-c</span> <span class="kw">|</span> <span class="dt">\</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>	<span class="fu">sort</span> <span class="at">-n</span> <span class="op">&gt;</span> data.out</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"====================================="</span></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Completed word analysis of </span><span class="va">$DATA_FILE</span><span class="st">"</span></span></code></pre>
 </div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
@@ -5006,7 +5023,7 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Building software, creating directories, and unpacking software are
 common and acceptable &gt; tasks for the login node: options #2
@@ -5216,7 +5233,7 @@ Comet?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: decimal">
 <li>

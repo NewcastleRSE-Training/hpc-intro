@@ -221,8 +221,8 @@ slurm-347087.out  serial-job.sh  amdahl  README.md  LICENSE.txt
 Doing 30.000 seconds of 'work' on 1 processor,
 which should take 30.000 seconds with 0.850 parallel proportion of the workload.
 
-  Hello, World! I am process 0 of 1 on smnode1. I will do all the serial 'work' for 4.500 seconds.
-  Hello, World! I am process 0 of 1 on smnode1. I will do parallel 'work' for 25.500 seconds.
+  Hello, World! I am process 0 of 1 on compute030. I will do all the serial 'work' for 4.500 seconds.
+  Hello, World! I am process 0 of 1 on compute030. I will do parallel 'work' for 25.500 seconds.
 
 Total execution time (according to rank 0): 30.033 seconds
 ```
@@ -334,11 +334,11 @@ slurm-347178.out  parallel-job.sh  slurm-347087.out  serial-job.sh  amdahl  READ
 Doing 30.000 seconds of 'work' on 4 processors,
 which should take 10.875 seconds with 0.850 parallel proportion of the workload.
 
-  Hello, World! I am process 0 of 4 on smnode1. I will do all the serial 'work' for 4.500 seconds.
-  Hello, World! I am process 2 of 4 on smnode1. I will do parallel 'work' for 6.375 seconds.
-  Hello, World! I am process 1 of 4 on smnode1. I will do parallel 'work' for 6.375 seconds.
-  Hello, World! I am process 3 of 4 on smnode1. I will do parallel 'work' for 6.375 seconds.
-  Hello, World! I am process 0 of 4 on smnode1. I will do parallel 'work' for 6.375 seconds.
+  Hello, World! I am process 0 of 4 on compute030. I will do all the serial 'work' for 4.500 seconds.
+  Hello, World! I am process 2 of 4 on compute030. I will do parallel 'work' for 6.375 seconds.
+  Hello, World! I am process 1 of 4 on compute030. I will do parallel 'work' for 6.375 seconds.
+  Hello, World! I am process 3 of 4 on compute030. I will do parallel 'work' for 6.375 seconds.
+  Hello, World! I am process 0 of 4 on compute030. I will do parallel 'work' for 6.375 seconds.
 
 Total execution time (according to rank 0): 10.888 seconds
 ```
@@ -450,15 +450,15 @@ slurm-347271.out  parallel-job.sh  slurm-347178.out  slurm-347087.out  serial-jo
 ```output
 which should take 7.688 seconds with 0.850 parallel proportion of the workload.
 
-  Hello, World! I am process 4 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 0 of 8 on smnode1. I will do all the serial 'work' for 4.500 seconds.
-  Hello, World! I am process 2 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 1 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 3 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 5 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 6 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 7 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
-  Hello, World! I am process 0 of 8 on smnode1. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 4 of 8 on compute030. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 0 of 8 on compute030. I will do all the serial 'work' for 4.500 seconds.
+  Hello, World! I am process 2 of 8 on compute030. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 1 of 8 on compute030. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 3 of 8 on compute030. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 5 of 8 on compute030. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 6 of 8 on compute030. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 7 of 8 on compute030. I will do parallel 'work' for 3.188 seconds.
+  Hello, World! I am process 0 of 8 on compute030. I will do parallel 'work' for 3.188 seconds.
 
 Total execution time (according to rank 0): 7.697 seconds
 ```

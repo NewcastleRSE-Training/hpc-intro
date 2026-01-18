@@ -179,7 +179,7 @@ name of a job. Add an option to the script:
 
 ```bash
 
-#SBATCH --job-name= hello-world
+#SBATCH --job-name=hello-world
 
 echo -n "This script is running on "
 hostname
@@ -282,7 +282,7 @@ wall time, and attempt to run a job for two minutes.
 
 ```bash
 
-#SBATCH --job-name= long_job
+#SBATCH --job-name=long_job
 #SBATCH -t 00:01 # timeout in HH:MM
 
 echo "This script is running on ... "
@@ -405,7 +405,7 @@ job with `Ctrl-c`.)
 ```
 
 ```output
-smnode1
+compute030
 ```
 
 `srun` accepts all of the same options as

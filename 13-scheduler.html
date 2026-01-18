@@ -862,7 +862,7 @@ makes it easy to start an interactive job with <code>srun</code>:</p>
 <div class="codewrapper sourceCode" id="cb31">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">[user@cometlogin01</span><span class="er">(</span><span class="ex">comet</span><span class="kw">)</span> <span class="ex">~]</span> srun <span class="at">--pty</span> bash</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="ex">[user@cometlogin01</span><span class="er">(</span><span class="ex">comet</span><span class="kw">)</span> <span class="ex">~]</span> srun <span class="at">--partition</span><span class="op">=</span>short_free <span class="at">--account</span><span class="op">=</span>comet_training <span class="at">--pty</span> bash</span></code></pre>
 </div>
 <p>You should be presented with a bash prompt. Note that the prompt will
 likely change to reflect your new location, in this case the compute

@@ -111,7 +111,7 @@ a compute node which the queuing system has identified as being
 available to perform the work.
 
 ```bash
-[user@cometlogin01(comet) ~] sbatch --partition= example-job.sh
+[user@cometlogin01(comet) ~] sbatch --partition=short_free --account=comet_training example-job.sh
 ```
 
 
@@ -188,7 +188,7 @@ hostname
 Submit the job and monitor its status:
 
 ```bash
-[user@cometlogin01(comet) ~] sbatch --partition= example-job.sh
+[user@cometlogin01(comet) ~] sbatch --partition=short_free --account=comet_training example-job.sh
 [user@cometlogin01(comet) ~] squeue -u user
 ```
 
@@ -261,7 +261,7 @@ hostname
 ```
 
 ```bash
-[user@cometlogin01(comet) ~] sbatch --partition= example-job.sh
+[user@cometlogin01(comet) ~] sbatch --partition=short_free --account=comet_training example-job.sh
 ```
 
 Why are the Slurm runtime and `sleep` time not identical?
@@ -294,7 +294,7 @@ Submit the job and wait for it to finish. Once it is has finished, check the
 log file.
 
 ```bash
-[user@cometlogin01(comet) ~] sbatch --partition= example-job.sh
+[user@cometlogin01(comet) ~] sbatch --partition=short_free --account=comet_training example-job.sh
 [user@cometlogin01(comet) ~] squeue -u user
 ```
 
@@ -327,7 +327,7 @@ its job number (remember to change the walltime so that it runs long enough for
 you to cancel it before it is killed!).
 
 ```bash
-[user@cometlogin01(comet) ~] sbatch --partition= example-job.sh
+[user@cometlogin01(comet) ~] sbatch --partition=short_free --account=comet_training example-job.sh
 [user@cometlogin01(comet) ~] squeue -u user
 ```
 
@@ -369,9 +369,9 @@ Try submitting multiple jobs and then cancelling them all.
 First, submit a trio of jobs:
 
 ```bash
-[user@cometlogin01(comet) ~] sbatch --partition= example-job.sh
-[user@cometlogin01(comet) ~] sbatch --partition= example-job.sh
-[user@cometlogin01(comet) ~] sbatch --partition= example-job.sh
+[user@cometlogin01(comet) ~] sbatch --partition=short_free --account=comet_training example-job.sh
+[user@cometlogin01(comet) ~] sbatch --partition=short_free --account=comet_training example-job.sh
+[user@cometlogin01(comet) ~] sbatch --partition=short_free --account=comet_training example-job.sh
 ```
 
 Then, cancel them all:

@@ -389,7 +389,7 @@ python3 --version
 ```
 
 ```bash
-[user@cometlogin01(comet) ~] sbatch --partition= python-module.sh
+[user@cometlogin01(comet) ~] sbatch --partition=short_free --account=comet_training python-module.sh
 ```
 
 :::::::::::::::::::::::::

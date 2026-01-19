@@ -624,9 +624,10 @@ required software dependencies.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Currently Loaded Modules:
-  1) GCCcore/x.y.z                 4) GMP/6.2.0-GCCcore-x.y.z
-  2) Tcl/8.6.10-GCCcore-x.y.z      5) libffi/3.3-GCCcore-x.y.z
-  3) SQLite/3.31.1-GCCcore-x.y.z   6) Python/3.x.y-GCCcore-x.y.z</code></pre>
+  1) slurm/24.05.3 (S)   2) lmod (S)   3) Python/3.14.0
+
+  Where:
+   S:  Module is Sticky, requires --force to unload or purge</code></pre>
 </div>
 <div class="codewrapper sourceCode" id="cb17">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -638,25 +639,15 @@ required software dependencies.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Currently Loaded Modules:
-  1) GCCcore/x.y.z                    14) libfabric/1.11.0-GCCcore-x.y.z
-  2) Tcl/8.6.10-GCCcore-x.y.z         15) PMIx/3.1.5-GCCcore-x.y.z
-  3) SQLite/3.31.1-GCCcore-x.y.z      16) OpenMPI/4.0.3-GCC-x.y.z
-  4) GMP/6.2.0-GCCcore-x.y.z          17) OpenBLAS/0.3.9-GCC-x.y.z
-  5) libffi/3.3-GCCcore-x.y.z         18) gompi/2020a
-  6) Python/3.x.y-GCCcore-x.y.z       19) FFTW/3.3.8-gompi-2020a
-  7) GCC/x.y.z                        20) ScaLAPACK/2.1.0-gompi-2020a
-  8) numactl/2.0.13-GCCcore-x.y.z     21) foss/2020a
-  9) libxml2/2.9.10-GCCcore-x.y.z     22) pybind11/2.4.3-GCCcore-x.y.z-Pytho...
- 10) libpciaccess/0.16-GCCcore-x.y.z  23) SciPy-bundle/2020.03-foss-2020a-Py...
- 11) hwloc/2.2.0-GCCcore-x.y.z        24) networkx/2.4-foss-2020a-Python-3.8...
- 12) libevent/2.1.11-GCCcore-x.y.z    25) GROMACS/2020.1-foss-2020a-Python-3...
- 13) UCX/1.8.0-GCCcore-x.y.z</code></pre>
+  1) slurm/24.05.3 (S)   3) Python/3.14.0   5) GROMACS/2025.2
+  2) lmod          (S)   4) GCC/14.3.0
+
+  Where:
+   S:  Module is Sticky, requires --force to unload or purge</code></pre>
 </div>
 <p>So in this case, loading the <code>GROMACS</code> module (a
-bioinformatics software package), also loaded
-<code>GMP/6.2.0-GCCcore-x.y.z</code> and
-<code>SciPy-bundle/2020.03-foss-2020a-Python-3.x.y</code> as well. Let’s
-try unloading the <code>GROMACS</code> package.</p>
+bioinformatics software package), also loaded <code>GCC/14.3.0</code>.
+Let’s try unloading the <code>GROMACS</code> package.</p>
 <div class="codewrapper sourceCode" id="cb19">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -667,18 +658,10 @@ try unloading the <code>GROMACS</code> package.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>Currently Loaded Modules:
-  1) GCCcore/x.y.z                    13) UCX/1.8.0-GCCcore-x.y.z
-  2) Tcl/8.6.10-GCCcore-x.y.z         14) libfabric/1.11.0-GCCcore-x.y.z
-  3) SQLite/3.31.1-GCCcore-x.y.z      15) PMIx/3.1.5-GCCcore-x.y.z
-  4) GMP/6.2.0-GCCcore-x.y.z          16) OpenMPI/4.0.3-GCC-x.y.z
-  5) libffi/3.3-GCCcore-x.y.z         17) OpenBLAS/0.3.9-GCC-x.y.z
-  6) Python/3.x.y-GCCcore-x.y.z       18) gompi/2020a
-  7) GCC/x.y.z                        19) FFTW/3.3.8-gompi-2020a
-  8) numactl/2.0.13-GCCcore-x.y.z     20) ScaLAPACK/2.1.0-gompi-2020a
-  9) libxml2/2.9.10-GCCcore-x.y.z     21) foss/2020a
- 10) libpciaccess/0.16-GCCcore-x.y.z  22) pybind11/2.4.3-GCCcore-x.y.z-Pytho...
- 11) hwloc/2.2.0-GCCcore-x.y.z        23) SciPy-bundle/2020.03-foss-2020a-Py...
- 12) libevent/2.1.11-GCCcore-x.y.z    24) networkx/2.4-foss-2020a-Python-3.x.y</code></pre>
+  1) slurm/24.05.3 (S)   2) lmod (S)   3) Python/3.14.0
+
+  Where:
+   S:  Module is Sticky, requires --force to unload or purge</code></pre>
 </div>
 <p>So using <code>module unload</code> “un-loads” a module, and
 depending on how a site is configured it may also unload all of the

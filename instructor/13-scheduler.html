@@ -448,11 +448,12 @@ scheduler to run the job is called <em>batch job submission</em>.</p>
 <p>In this case, the job we want to run is a shell script – essentially
 a text file containing a list of UNIX commands to be executed in a
 sequential manner. Our shell script will have three parts:</p>
-<ul><li>On the very first line, add `<code>. The</code>#!` (pronounced
-“hash-bang” or “shebang”) tells the computer what program is meant to
-process the contents of this file. In this case, we are telling it that
-the commands that follow are written for the command-line shell (what
-we’ve been doing everything in so far).</li>
+<ul><li>On the very first line, add <code>#!/bin/bash</code>. The
+<code>#!</code> (pronounced “hash-bang” or “shebang”) tells the computer
+what program is meant to process the contents of this file. In this
+case, we are telling it that the commands that follow are written for
+the command-line shell (what we’ve been doing everything in so
+far).</li>
 <li>Anywhere below the first line, we’ll add an <code>echo</code>
 command with a friendly greeting. When run, the shell script will print
 whatever comes after <code>echo</code> in the terminal.
@@ -494,7 +495,7 @@ node?</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -658,7 +659,7 @@ then submit a job for it on the cluster.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper sourceCode" id="cb13">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -791,7 +792,7 @@ yourself). Note that you can only delete your own jobs.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>First, submit a trio of jobs:</p>
 <div class="codewrapper sourceCode" id="cb25">

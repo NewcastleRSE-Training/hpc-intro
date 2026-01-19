@@ -379,7 +379,7 @@ compute node).
 ```
 
 ```output
-
+#!/bin/bash
 #SBATCH 
 r config$sched$comment` -t 00:00:30
 

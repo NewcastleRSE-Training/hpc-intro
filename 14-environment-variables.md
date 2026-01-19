@@ -209,7 +209,7 @@ job was submitted.
 ```
 
 ```output
-
+#!/bin/bash
 #SBATCH -t 00:00:30
 
 echo -n "This script is running on "

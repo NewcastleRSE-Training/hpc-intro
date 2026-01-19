@@ -74,7 +74,7 @@ or download it from https://github.com/NewcastleRSE-Training/hpc-intro/blob/main
 Check slurm.out files to see how quickly the jobs completed
 
 ```bash
-#!/bin/bash
+
 #SBATCH --partition=short_free
 #SBATCH --job-name=
 #SBATCH --nodes=1

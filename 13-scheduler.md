@@ -72,7 +72,7 @@ manner. Our shell script will have three parts:
 ```
 
 ```bash
-
+#!/bin/bash
 
 echo -n "This script is running on "
 hostname
@@ -162,7 +162,7 @@ resources we must customize our job script.
 Comments in UNIX shell scripts (denoted by `#`) are typically ignored, but
 there are exceptions. For instance the special `#!` comment at the beginning of
 scripts specifies what program should be used to run it (you'll typically see
-``). Schedulers like Slurm also
+`#!/usr/bin/env bash`). Schedulers like Slurm also
 have a special comment used to denote special scheduler-specific options.
 Though these comments differ from scheduler to scheduler,
 Slurm's special comment is `#SBATCH`. Anything
@@ -178,7 +178,7 @@ name of a job. Add an option to the script:
 ```
 
 ```bash
-
+#!/bin/bash
 #SBATCH --job-name=hello-world
 
 echo -n "This script is running on "
@@ -252,7 +252,7 @@ for it on the cluster.
 ```
 
 ```bash
-
+#!/bin/bash
 #SBATCH -t 00:01 # timeout in HH:MM
 
 echo -n "This script is running on "
@@ -281,7 +281,7 @@ wall time, and attempt to run a job for two minutes.
 ```
 
 ```bash
-
+#!/bin/bash
 #SBATCH --job-name=long_job
 #SBATCH -t 00:01 # timeout in HH:MM
 

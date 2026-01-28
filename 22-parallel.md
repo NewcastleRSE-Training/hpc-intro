@@ -32,6 +32,12 @@ a single task to be distributed over several CPU cores.
 
 It is thus possible to use array jobs in conjunction with MPI. 
 
+In this episode we will use two small programs, written in C, to 
+calculate the number of primes found between two given numbers. One of
+the programs calculates prime and by using MPI spreads the job over several 
+CPU cores while the other program doesn't. After running both these programs
+one can compare their output to see the difference in efficiency.
+
 If you disconnected, log back in to the cluster.
 
 ```bash
@@ -42,135 +48,115 @@ If you disconnected, log back in to the cluster.
 
 Ideally the code for this episode should be pre-compiled and made available for
 students to download. We have found that expecting students to write or even 
-compile code causes information overload and confusion
+compile code causes information overload and confusion. 
+
+The code and scripts to compile can be downloaded from [https://github.com/NewcastleRSE-Training/HPC_Training_Example_Jobs](https://github.com/NewcastleRSE-Training/HPC_Training_Example_Jobs).
+After compiling the two versions of the program, copy it to a place where students
+can copy or download it from.
+
+The binaries of the two programs will be very small so the fact that there would
+be duplication if all the students copy the binaries to their own working directories
+should not really matter. In doing it this way, students will also get the 
+opportunity to submit a job where the program they are using is in their local 
+directory (rather than loading a module).
 
 ::::
 
-## Download
+:::: spoiler
 
-With the Amdahl source code on the cluster, we can install it, which will
-provide access to the `amdahl` executable.
-Move into the extracted directory, then use the Package Installer for Python,
-or `pip`, to install it in your ("user") home directory:
+## Compiling the prime calculator from code
 
-```bash
-[user@cometlogin01(comet) ~] cd amdahl
-[user@cometlogin01(comet) ~] python3 -m pip install --user .
-```
+Only do this if pre-compiled binaries of the programs have not been made available to you.
 
-:::::::::::::::::::::::::::::::::::::::::  callout
+### Requirements
+- GCC
 
-## Amdahl is Python Code
+### Steps
+- Download code
+- Compile code
+- Copy binaries to home directory
 
-The Amdahl program is written in Python, and installing or using it requires
-locating the `python3` executable on the login node.
-If it can't be found, try listing available modules using `module avail`,
-load the appropriate one, and try the command again.
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-### MPI for Python
-
-The Amdahl code has one dependency: **mpi4py**.
-If it hasn't already been installed on the cluster, `pip` will attempt to
-collect mpi4py from the Internet and install it for you.
-If this fails due to a one-way firewall, you must retrieve mpi4py on your
-local machine and upload it, just as we did for Amdahl.
-
-::::::::::::::::::::::::::::::::::::::  discussion
-
-## Retrieve and Upload `mpi4py`
-
-If installing Amdahl failed because mpi4py could not be installed,
-retrieve the tarball from <https://github.com/mpi4py/mpi4py/tarball/master>
-then `rsync` it to the cluster, extract, and install:
-
-```bash
-[you@laptop:~]$ wget -O mpi4py.tar.gz https://github.com/mpi4py/mpi4py/releases/download/3.1.4/mpi4py-3.1.4.tar.gz
-[you@laptop:~]$ scp mpi4py.tar.gz user@comet.ncl.ac.uk:
-# or
-[you@laptop:~]$ rsync -avP mpi4py.tar.gz user@comet.ncl.ac.uk:
-```
+If you disconnected, log back in to the cluster.
 
 ```bash
 [you@laptop:~]$ ssh user@comet.ncl.ac.uk
-[user@cometlogin01(comet) ~] tar -xvzf mpi4py.tar.gz  # extract the archive
-[user@cometlogin01(comet) ~] mv mpi4py* mpi4py        # rename the directory
-[user@cometlogin01(comet) ~] cd mpi4py
-[user@cometlogin01(comet) ~] python3 -m pip install --user .
-[user@cometlogin01(comet) ~] cd ../amdahl
-[user@cometlogin01(comet) ~] python3 -m pip install --user .
 ```
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::  discussion
-
-## If `pip` Raises a Warning...
-
-`pip` may warn that your user package binaries are not in your PATH.
-
-```warning
-WARNING: The script amdahl is installed in "${HOME}/.local/bin" which is
-not on PATH. Consider adding this directory to PATH or, if you prefer to
-suppress this warning, use --no-warn-script-location.
-```
-
-To check whether this warning is a problem, use `which` to search for the
-`amdahl` program:
+Clone the repository
 
 ```bash
-[user@cometlogin01(comet) ~] which amdahl
+[you@laptop:~]$ git clone git@github.com:NewcastleRSE-Training/HPC_Training_Example_Jobs.git
 ```
 
-If the command returns no output, displaying a new prompt, it means the file
-`amdahl` has not been found. You must update the environment variable named
-`PATH` to include the missing folder.
-Edit your shell configuration file as follows, then log off the cluster and
-back on again so it takes effect.
+Compile the code.
 
 ```bash
-[user@cometlogin01(comet) ~] nano ~/.bashrc
-[user@cometlogin01(comet) ~] tail ~/.bashrc
+[you@laptop:~]$ cd HPC_Training_Example/c
+[you@laptop:~]$ module load GCC
+[you@laptop:~]$ ./compile.sh
 ```
 
 ```output
-export PATH=${PATH}:${HOME}/.local/bin
+Compiling primes.c function...
+Compiling single process version...
+Creating executable binary...
+-rwxr-x--- 1 username group 17472 Jan 23 11:14 single_gcc
+
+Compiling primes.c function...
+Compiling single process version...
+Creating executable binary...
+-rwxr-x--- 1 username group 7176 Jan 23 11:14 single_aocc
+
+Compiling primes.c function...
+Compiling MPI multi-process version...
+Creating executable binary...
+-rwxr-x--- 1 username group 17096 Jan 23 11:14 multi
+[you@laptop:~]$ 
+
 ```
 
-After logging back in to comet.ncl.ac.uk, `which` should be able to
-find `amdahl` without difficulties.
-If you had to load a Python module, load it again.
+Move (or copy) the binaries to your home directory
 
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
+::::
+
+
+## Copying the programs into your local directory
+
+Make sure you are in your home directory. 
+
+```bash
+[you@laptop:~]$ cd ~
+```
+
+You will need to amend the from-directory in the instruction below if you did not
+compile the code yourself according to the above challenge:
+
+```bash
+[you@laptop:~]$ mkdir primes
+[you@laptop:~]$ cd primes
+[you@laptop:~]$ cp ~/HPC_Training_Example_Jobs/c/multi ~/HPC_Training_Example_Jobs/c/single_gcc .
+[you@laptop:~]$ 
+
+```
+
+
 
 ## Help!
 
-Many command-line programs include a "help" message. Try it with `amdahl`:
+Many command-line programs include a "help" message. Try it with `single_gcc`:
 
 ```bash
-[user@cometlogin01(comet) ~] amdahl --help
+[user@cometlogin01(comet) ~] ./single_gcc
 ```
 
 ```output
-usage: amdahl [-h] [-p [PARALLEL_PROPORTION]] [-w [WORK_SECONDS]] [-t] [-e] [-j [JITTER_PROPORTION]]
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -p [PARALLEL_PROPORTION], --parallel-proportion [PARALLEL_PROPORTION]
-                        Parallel proportion: a float between 0 and 1
-  -w [WORK_SECONDS], --work-seconds [WORK_SECONDS]
-                        Total seconds of workload: an integer greater than 0
-  -t, --terse           Format output as a machine-readable object for easier analysis
-  -e, --exact           Exactly match requested timing by disabling random jitter
-  -j [JITTER_PROPORTION], --jitter-proportion [JITTER_PROPORTION]
-                        Random jitter: a float between -1 and +1
+You must enter two positive numbers in the range 1 - 2^32
 ```
 
 This message doesn't tell us much about what the program *does*, but it does
-tell us the important flags we might want to use when launching it.
+tell us that we need to provide two numbers that specify the beginning and
+the end of a range that lies between 1 and 2^32.
 
 ## Running the Job on a Compute Node
 
@@ -178,26 +164,34 @@ Create a submission file, requesting one task on a single node, then launch it.
 
 
 ```bash
-[user@cometlogin01(comet) ~] nano serial-job.sh
-[user@cometlogin01(comet) ~] cat serial-job.sh
+[user@cometlogin01(comet) ~] nano job_single.sh
+[user@cometlogin01(comet) ~] cat job_single.sh
 ```
 
 ```bash
 #!/bin/bash
-#SBATCH --job-name= solo-job
-#SBATCH --partition= cpubase_bycore_b1
-#SBATCH -N 1
-#SBATCH -n 1
 
-# Load the computing environment we need
-module load Python
+#SBATCH --partition=short_free
+#SBATCH --account=comet_training
+#SBATCH --job-name=single
+#SBATCH --ntasks-per-node=16
+#SBATCH --nodes=1
 
-# Execute the task
-amdahl
+
+PRIMES_START=2
+PRIMES_END=10000000
+
+echo "Starting Multi-process primes calculation ($PRIMES_START - $PRIMES_END) x${SLURM_NTASKS}"
+echo "====================="
+
+time ./single_gcc $PRIMES_START $PRIMES_END
+echo "====================="
+echo "Primes calculation complete"
 ```
 
+
 ```bash
-[user@cometlogin01(comet) ~] sbatch serial-job.sh
+[user@cometlogin01(comet) ~] sbatch job_single.sh
 ```
 
 As before, use the Slurm status commands to check whether your job

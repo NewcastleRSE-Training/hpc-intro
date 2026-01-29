@@ -32,6 +32,22 @@ a single task to be distributed over several CPU cores.
 
 It is thus possible to use array jobs in conjunction with MPI. 
 
+:::::::::::::::::::::::::::::::::::::::::  callout
+
+## What is MPI?
+
+The Message Passing Interface is a set of tools which allow multiple tasks
+running simultaneously to communicate with each other.
+Typically, a single executable is run multiple times, possibly on different
+machines, and the MPI tools are used to inform each instance of the
+executable about its sibling processes, and which instance it is.
+MPI also provides tools to allow communication between instances to
+coordinate work, exchange information about elements of the task, or to
+transfer data.
+An MPI instance typically has its own copy of all the local variables.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 In this episode we will use two small programs, written in C, to 
 calculate the number of primes found between two given numbers. One of
 the programs calculates prime and by using MPI spreads the job over several 
@@ -158,6 +174,34 @@ This message doesn't tell us much about what the program *does*, but it does
 tell us that we need to provide two numbers that specify the beginning and
 the end of a range that lies between 1 and 2^32.
 
+:::: callout 
+
+### The `time` command
+
+You will notice in the batch scripts that we will be creating we will be using
+the `time` command before the name of the program. For example:
+
+```bash
+[user@cometlogin01(comet) ~] time ./single_gcc
+```
+
+```output
+You must enter two positive numbers in the range 2 - 2^32
+
+real	0m0.005s
+user	0m0.000s
+sys	0m0.002s
+```
+The very first line of the output is the output of the program we want to run, 
+i.e. `single_gcc`. After that `time` returns three times. `real` is wall clock 
+time. If you ran a stopwatch, that is how long it would have taken. The `user` 
+time is the amount of CPU time it has taken. `sys` is kernel/system call time. 
+That is the time the code spent doing things that were not part of your code, 
+but essential stuff like interrupts, time the kernel spent setting up processes 
+and memory.
+
+:::::
+
 ## Running the Job on a Compute Node
 
 Create a submission file, requesting one task on a single node, then launch it.
@@ -174,14 +218,15 @@ Create a submission file, requesting one task on a single node, then launch it.
 #SBATCH --partition=short_free
 #SBATCH --account=comet_training
 #SBATCH --job-name=single
-#SBATCH --ntasks-per-node=16
+#SBATCH --tasks=1
 #SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
 
 
 PRIMES_START=2
 PRIMES_END=10000000
 
-echo "Starting Multi-process primes calculation ($PRIMES_START - $PRIMES_END) x${SLURM_NTASKS}"
+echo "Starting single process primes calculation ($PRIMES_START - $PRIMES_END)"
 echo "====================="
 
 time ./single_gcc $PRIMES_START $PRIMES_END
@@ -194,11 +239,11 @@ echo "Primes calculation complete"
 [user@cometlogin01(comet) ~] sbatch job_single.sh
 ```
 
-As before, use the Slurm status commands to check whether your job
+Use the Slurm status commands to check whether your job
 is running and when it ends:
 
 ```bash
-[user@cometlogin01(comet) ~] squeue -u user
+[user@cometlogin01(comet) ~] squeue --me
 ```
 
 Use `ls` to locate the output file. The `-t` flag sorts in
@@ -216,56 +261,30 @@ job from. For example,
 ```
 
 ```output
-slurm-347087.out  serial-job.sh  amdahl  README.md  LICENSE.txt
+slurm-1177272.out  job_single.sh  job_multi.sh  single_gcc  multi
 ```
 
 ```bash
-[user@cometlogin01(comet) ~] cat slurm-347087.out
+[user@cometlogin01(comet) ~] cat slurm-1177272.out
 ```
 
 ```output
-Doing 30.000 seconds of 'work' on 1 processor,
-which should take 30.000 seconds with 0.850 parallel proportion of the workload.
+Starting single process primes calculation (2 - 10000000)
+=====================
+main: Calculating primes in the range 2 - 10000000
+primeCount: Calculating primes 2 - 10000000
+primeCount: Found 664579 primes
+main: Found a total of 664579 primes
 
-  Hello, World! I am process 0 of 1 on compute030. I will do all the serial 'work' for 4.500 seconds.
-  Hello, World! I am process 0 of 1 on compute030. I will do parallel 'work' for 25.500 seconds.
+real	0m34.476s
+user	0m34.247s
+sys	0m0.002s
+=====================
+Primes calculation complete
 
-Total execution time (according to rank 0): 30.033 seconds
 ```
 
 :::::::::::::::::::::::::
-
-As we saw before, two of the `amdahl` program flags set the amount of work and
-the proportion of that work that is parallel in nature. Based on the output, we
-can see that the code uses a default of 30 seconds of work that is 85%
-parallel. The program ran for just over 30 seconds in total, and if we run the
-numbers, it is true that 15% of it was marked 'serial' and 85% was 'parallel'.
-
-Since we only gave the job one CPU, this job wasn't really parallel: the same
-processor performed the 'serial' work for 4.5 seconds, then the 'parallel' part
-for 25.5 seconds, and no time was saved. The cluster can do better, if we ask.
-
-## Running the Parallel Job
-
-The `amdahl` program uses the Message Passing Interface (MPI) for parallelism
--- this is a common tool on HPC systems.
-
-:::::::::::::::::::::::::::::::::::::::::  callout
-
-## What is MPI?
-
-The Message Passing Interface is a set of tools which allow multiple tasks
-running simultaneously to communicate with each other.
-Typically, a single executable is run multiple times, possibly on different
-machines, and the MPI tools are used to inform each instance of the
-executable about its sibling processes, and which instance it is.
-MPI also provides tools to allow communication between instances to
-coordinate work, exchange information about elements of the task, or to
-transfer data.
-An MPI instance typically has its own copy of all the local variables.
-
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 While MPI-aware executables can generally be run as stand-alone programs, in
 order for them to run in parallel they must use an MPI *run-time environment*,
@@ -274,6 +293,12 @@ To activate the MPI environment, the program should be started via a command
 such as `mpiexec` (or `mpirun`, or `srun`, etc. depending on the MPI run-time
 you need to use), which will ensure that the appropriate run-time support for
 parallelism is included.
+
+## Running the Parallel Job
+
+The program `multi` uses the Message Passing Interface (MPI) for parallelism.
+-- this is a common tool on HPC systems.
+
 
 :::::::::::::::::::::::::::::::::::::::::  callout
 
@@ -293,60 +318,31 @@ Let's modify the job script to request more cores and use the MPI run-time.
 
 
 ```bash
-[user@cometlogin01(comet) ~] cp serial-job.sh parallel-job.sh
 [user@cometlogin01(comet) ~] nano parallel-job.sh
 [user@cometlogin01(comet) ~] cat parallel-job.sh
 ```
 
-```bash
+```output
 #!/bin/bash
-#SBATCH --job-name= parallel-job
-#SBATCH --partition= cpubase_bycore_b1
-#SBATCH -N 1
-#SBATCH -n 4
 
-# Load the computing environment we need
-# (mpi4py and numpy are in SciPy-bundle)
-module load Python
-module load SciPy-bundle
+#SBATCH --partition=short_free
+#SBATCH --account=comet_training
+#SBATCH --job-name=multi
+#SBATCH --ntasks-per-node=16
+#SBATCH --nodes=1
 
-# Execute the task
-mpiexec amdahl
-```
 
-Then submit your job. Note that the submission command has not really changed
-from how we submitted the serial job: all the parallel settings are in the
-batch file rather than the command line.
+PRIMES_START=2
+PRIMES_END=10000000
 
-```bash
-[user@cometlogin01(comet) ~] sbatch parallel-job.sh
-```
+module load OpenMPI
 
-As before, use the status commands to check when your job runs.
+echo "Starting Multi-process primes calculation ($PRIMES_START - $PRIMES_END) x${SLURM_NTASKS}"
+echo "====================="
 
-```bash
-[user@cometlogin01(comet) ~] ls -t
-```
-
-```output
-slurm-347178.out  parallel-job.sh  slurm-347087.out  serial-job.sh  amdahl  README.md  LICENSE.txt
-```
-
-```bash
-[user@cometlogin01(comet) ~] cat slurm-347178.out
-```
-
-```output
-Doing 30.000 seconds of 'work' on 4 processors,
-which should take 10.875 seconds with 0.850 parallel proportion of the workload.
-
-  Hello, World! I am process 0 of 4 on compute030. I will do all the serial 'work' for 4.500 seconds.
-  Hello, World! I am process 2 of 4 on compute030. I will do parallel 'work' for 6.375 seconds.
-  Hello, World! I am process 1 of 4 on compute030. I will do parallel 'work' for 6.375 seconds.
-  Hello, World! I am process 3 of 4 on compute030. I will do parallel 'work' for 6.375 seconds.
-  Hello, World! I am process 0 of 4 on compute030. I will do parallel 'work' for 6.375 seconds.
-
-Total execution time (according to rank 0): 10.888 seconds
+time mpirun ./multi $PRIMES_START $PRIMES_END
+echo "====================="
+echo "Primes calculation complete"
 ```
 
 :::::::::::::::::::::::::::::::::::::::  challenge
